@@ -11,6 +11,10 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Route::get('vehiculo', 'VehiculoController@index')->name('vehiculo.index');
+Route::resource('vehiculo','VehiculoController');

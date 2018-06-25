@@ -13,20 +13,20 @@ class CreateVehiculoTable extends Migration
      */
     public function up()
     {
-        Schema::create('vehiculos', function (Blueprint $table) {
+        Schema::create('vehiculo', function (Blueprint $table) {
             $table->increments('id');
             $table->string('patente')->unique();
             $table->string('marca');
             $table->string('modelo');
-            $table->int('anio');
-            $table->int('kilometrajeInicial');
-            $table->int('capacidadEstanque');
-            $table->string('dueno');
+            $table->integer('anio');
+            $table->integer('kilometrajeInicial');
+            $table->integer('capacidadEstanque');
+            $table->string('dueno')->nullable();
             $table->string('tipoVehiculo');
             $table->string('color');
             $table->string('numeroMotor')->unique();
             $table->string('numeroChasis')->unique();
-            $table->string('observaciones');
+            $table->string('observaciones')->nullable();
             $table->timestamps();
         });
     }
@@ -38,6 +38,6 @@ class CreateVehiculoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vehiculos');
+        Schema::dropIfExists('vehiculo');
     }
 }
