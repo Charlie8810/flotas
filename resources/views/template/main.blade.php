@@ -8,6 +8,9 @@
 
     <title>@yield('title','Inicio') |  Administracion Buses Villar </title>
 
+    <!--Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <!--Css Principal-->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!--Estilos de las vistas-->
@@ -28,8 +31,17 @@
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>
   </nav>
-  @yield('contenido')
-  <footer class="page-footer teal">
+  <main>
+    <div class="row">
+      <div class="col s12 m4 l3 grey" style="height:900px;"> <!-- Note that "m4 l3" was added -->
+          <p>Hola MUNDO</p>
+      </div>
+      <div class="col s12 m8 l9 teal" style="height:900px;"> <!-- Note that "m8 l9" was added -->
+          @yield('contenido')
+      </div>
+    </div>
+  </main>
+  <footer class="page-footer grey">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
