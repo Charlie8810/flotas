@@ -12,5 +12,10 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css')
-   .js('resources/assets/js/components/vehiculo.listado.js', 'public/js');
+    .sass('resources/assets/sass/app.scss', 'public/css')
+
+   .js('resources/assets/js/components/vehiculo.listado.js', 'public/js')
+   .sass('resources/assets/sass/vehiculo.listado.scss', 'public/css')
+
+   .js('resources/assets/js/components/vehiculo.detalle.js', 'public/js')
+   .sass('resources/assets/sass/vehiculo.detalle.scss', 'public/css')

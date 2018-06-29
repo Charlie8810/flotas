@@ -18,5 +18,7 @@
         "materialize-css": "^1.0.0-rc.2",
         "popper.js": "^1.12"
     },
-    "dependencies": {}
+    "dependencies": {
+        "datatables.net-dt": "^1.10.19"
+    }
 }

@@ -19,33 +19,53 @@
 </head>
 
 <body>
-  <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Gestión de Flotas</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#">Navbar Link</a></li>
-      </ul>
+  <header>
 
-      <ul id="nav-mobile" class="sidenav">
-        <li><a href="#">Navbar Link</a></li>
-      </ul>
-      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <div class="navbar-fixed">
+        <nav class="light-blue lighten-1" role="navigation">
+          <div class="nav-wrapper container fixed">
+            <a id="logo-container" href="#" class="brand-logo">@yield('title','Inicio')</a>
+            <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          </div>
+      </nav>
     </div>
-  </nav>
+
+    <ul id="slide-out" class="sidenav sidenav-fixed">
+      <li>
+        <a href="#!" class="logo-container">Gestión Flotas<i class="material-icons left medium">directions</i></a>
+      </li>
+      <li class="bold"><a href="#!"><i class="small material-icons">directions_bus</i> Vehiculos</a></li>
+      <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+          <li>
+            <a class="collapsible-header">Mantenedores</a>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="#!">Coferes</a></li>
+                <li><a href="#!">Second</a></li>
+                <li><a href="#!">Third</a></li>
+                <li><a href="#!">Fourth</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
+
+    </ul>
+
+
+
+  </header>
   <main>
-    <div class="row">
-      <div class="col s12 m4 l3 grey" style="height:900px;"> <!-- Note that "m4 l3" was added -->
-          <p>Hola MUNDO</p>
-      </div>
-      <div class="col s12 m8 l9 teal" style="height:900px;"> <!-- Note that "m8 l9" was added -->
-          @yield('contenido')
-      </div>
-    </div>
+    @yield('contenido')
   </main>
   <footer class="page-footer grey">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <h5 class="white-text">Buses Villar Ltda.</h5>
+          <a href="#!">
+              <img src="/img/logo.png"  />
+          </a>
           <p class="grey-text text-lighten-4">Somos una empresa dedicada al transporte privado.</p>
           <p class="grey-text text-lighten-4">Bienaventurados los que controlan la gestión de su empresa con la ayuda de la tecnología.</p>
         </div>

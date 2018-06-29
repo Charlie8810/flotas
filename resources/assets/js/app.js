@@ -7,3 +7,7 @@
 
 /*Librerias Generales Acá, las que van por pagina se colocan en webpack.mix.js*/
 require('./materialize');
+
+
+/*Codigo de Inicializacion de Componnentes graficos*/
+ M.AutoInit();
