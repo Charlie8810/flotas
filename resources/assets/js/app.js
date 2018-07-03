@@ -11,3 +11,14 @@ require('./materialize');
 
 /*Codigo de Inicializacion de Componnentes graficos*/
  M.AutoInit();
+
+ var elem = document.querySelector('.collapsible.expandable');
+ var instance = M.Collapsible.init(elem, {
+   accordion: false
+ });
+
+/*Carga de tooltip
+ $(function(){
+   $('.tooltipped').tooltip();
+ });
+*/

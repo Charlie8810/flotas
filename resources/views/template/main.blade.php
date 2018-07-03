@@ -13,6 +13,7 @@
 
     <!--Css Principal-->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <!--Estilos de las vistas-->
     @yield('styles')
 
@@ -21,14 +22,18 @@
 <body>
   <header>
 
-      <div class="navbar-fixed">
-        <nav class="light-blue lighten-1" role="navigation">
-          <div class="nav-wrapper container fixed">
-            <a id="logo-container" href="#" class="brand-logo">@yield('title','Inicio')</a>
-            <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-          </div>
+
+    <div class="navbar-fixed nav-extended">
+      <nav class="light-blue lighten-1 " role="navigation">
+        <div class="nav-wrapper container">
+          <a id="logo-container" href="#!" class="flow-text">@yield('title','Inicio')</a>
+          <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </div>
       </nav>
+      @yield('botonera')
+
     </div>
+
 
     <ul id="slide-out" class="sidenav sidenav-fixed">
       <li>
@@ -98,6 +103,8 @@
 
    <!--Js Principal-->
    <script src="{{ asset('js/app.js') }}"></script>
+   <script src="{{ asset('js/formatter.min.js') }}"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
    <!--Scripts de las vistas-->
    @yield('scripts')
  </body>

@@ -18,3 +18,14 @@ Route::get('/', function () {
 
 //Route::get('vehiculo', 'VehiculoController@index')->name('vehiculo.index');
 Route::resource('vehiculo','VehiculoController');
+//Route::resource('seguro','SeguroController');
+Route::get('vehiculo/{vehiculo}/seguro', 'SeguroController@index')->name('seguro.index');
+Route::post('vehiculo/{vehiculo}/seguro', 'SeguroController@store')->name('seguro.store');
+Route::get('vehiculo/{vehiculo}/seguro/create', 'SeguroController@create')->name('seguro.create');
+Route::put('vehiculo/{vehiculo}/seguro/{seguro}', 'SeguroController@update')->name('seguro.update');
+Route::get('vehiculo/{vehiculo}/seguro/{seguro}', 'SeguroController@show')->name('seguro.show');
+Route::delete('vehiculo/{vehiculo}/seguro/{seguro}', 'SeguroController@destroy')->name('seguro.destroy');
+Route::get('vehiculo/{vehiculo}/seguro/{seguro}/edit', 'SeguroController@edit')->name('seguro.edit');
+
+//Route::resource('combustible','CombustibleController');
+//Route::resource('configuracion','ConfiguracionController');

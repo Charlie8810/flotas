@@ -60,20 +60,20 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 171);
+/******/ 	return __webpack_require__(__webpack_require__.s = 175);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 171:
+/***/ 175:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(172);
+module.exports = __webpack_require__(176);
 
 
 /***/ }),
 
-/***/ 172:
+/***/ 176:
 /***/ (function(module, exports) {
 
 //window.dt = require( 'datatables.net-dt' )(window, window.$);
@@ -81,13 +81,12 @@ module.exports = __webpack_require__(172);
 $(document).ready(function () {
 
   var _raw_data = JSON.parse($("#__data").val());
-
+  var _id_vehiculo = $('#__idVehiculo').val();
   var _prep_data = _raw_data.map(function (e) {
-    return [e.id, '<span class="badge patente black">' + e.patente + '</span>', e.marca, e.modelo, e.anio, e.kilometrajeInicial, e.dueno];
+    return [e.id, e.numeroPoliza, e.inicioCobertura, e.vencimientoCobertura, e.valorTotal, e.montoCuota, e.numeroCuotas];
   });
 
   $('#table-custom-elements').DataTable({
-    responsive: true,
     data: _prep_data,
     columnDefs: [{
       targets: 0,
@@ -95,8 +94,7 @@ $(document).ready(function () {
       orderable: !1,
       className: 'dataTables-checkbox-column',
       render: function render(t, e, i, n) {
-
-        return '<div class="valign-wrapper">\n                        <a href="/vehiculo/' + t + '" title="Ficha Veh\xEDculo" class="desc-icon"><i class="lite material-icons">directions_bus</i></a>\n                        <a href="/vehiculo/' + t + '/seguro" title="Seguros" class="desc-icon"><i class="lite material-icons">card_travel</i></a>\n                        <a href="/vehiculo/' + t + '/combustible" title="Combustibles" class="desc-icon"><i class="lite material-icons">local_gas_station</i></a>\n                        <a href="/vehiculo/' + t + '/configuracion" title="Configuraciones" class="desc-icon"><i class="lite material-icons">settings</i></a>\n                      </div>';
+        return '<a href="/vehiculo/' + _id_vehiculo + '/seguro/' + t + '" title="Detalle Seguro" class="desc-icon"><i class="lite material-icons">description</i></a>';
       }
     }],
     language: {

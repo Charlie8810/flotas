@@ -2,25 +2,21 @@
 
   $(document).ready(function () {
 
-
-
-
     const _raw_data = JSON.parse($("#__data").val());
-
+    const _id_vehiculo = $('#__idVehiculo').val();
     const _prep_data = _raw_data.map((e)=>{
         return [
           e.id,
-          `<span class="badge patente black">${e.patente}</span>`,
-          e.marca,
-          e.modelo,
-          e.anio,
-          e.kilometrajeInicial,
-          e.dueno
+          e.numeroPoliza,
+          e.inicioCobertura,
+          e.vencimientoCobertura,
+          e.valorTotal,
+          e.montoCuota,
+          e.numeroCuotas
         ]
     });
 
     $('#table-custom-elements').DataTable({
-      responsive: true,
       data: _prep_data,
       columnDefs: [
         {
@@ -29,13 +25,7 @@
           orderable: !1,
           className: 'dataTables-checkbox-column',
           render: function (t, e, i, n) {
-
-              return `<div class="valign-wrapper">
-                        <a href="/vehiculo/${t}" title="Ficha Vehículo" class="desc-icon"><i class="lite material-icons">directions_bus</i></a>
-                        <a href="/vehiculo/${t}/seguro" title="Seguros" class="desc-icon"><i class="lite material-icons">card_travel</i></a>
-                        <a href="/vehiculo/${t}/combustible" title="Combustibles" class="desc-icon"><i class="lite material-icons">local_gas_station</i></a>
-                        <a href="/vehiculo/${t}/configuracion" title="Configuraciones" class="desc-icon"><i class="lite material-icons">settings</i></a>
-                      </div>`;
+              return `<a href="/vehiculo/${_id_vehiculo}/seguro/${t}" title="Detalle Seguro" class="desc-icon"><i class="lite material-icons">description</i></a>`;
           }
         }
       ],

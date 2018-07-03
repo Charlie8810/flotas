@@ -1,11 +1,13 @@
-
 window._ = require('lodash');
 window.Popper = require('popper.js').default;
+window.swal = require('sweetalert');
+window.moment = require('moment');
 
 try {
     window.$ = window.jQuery =  require('jquery');
 
     require('materialize-css');
+    require('jquery-validation');
 } catch (e) {
     console.error('Error al cargar librerias jQuery o Materialize-css');
 }

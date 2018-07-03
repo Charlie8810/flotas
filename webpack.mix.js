@@ -19,3 +19,14 @@ mix.js('resources/assets/js/app.js', 'public/js')
 
    .js('resources/assets/js/components/vehiculo.detalle.js', 'public/js')
    .sass('resources/assets/sass/vehiculo.detalle.scss', 'public/css')
+
+   .js('resources/assets/js/components/seguro.index.js', 'public/js')
+   .sass('resources/assets/sass/seguro.index.scss', 'public/css')
+
+   .js('resources/assets/js/components/seguro.detalle.js', 'public/js')
+   .sass('resources/assets/sass/seguro.detalle.scss', 'public/css')
+
+   .js('resources/assets/js/select2-materialize.js', 'public/js')
+   .sass('resources/assets/sass/select2-materialize.scss', 'public/css')
+
+   .copy('node_modules/formatter.js/dist/jquery.formatter.min.js', 'public/js/formatter.min.js');

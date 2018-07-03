@@ -3,6 +3,13 @@
     "/css/app.css": "/css/app.css",
     "/css/vehiculo.listado.css": "/css/vehiculo.listado.css",
     "/css/vehiculo.detalle.css": "/css/vehiculo.detalle.css",
+    "/css/seguro.index.css": "/css/seguro.index.css",
+    "/css/seguro.detalle.css": "/css/seguro.detalle.css",
+    "/css/select2-materialize.css": "/css/select2-materialize.css",
+    "/js/select2-materialize.js": "/js/select2-materialize.js",
     "/js/vehiculo.listado.js": "/js/vehiculo.listado.js",
-    "/js/vehiculo.detalle.js": "/js/vehiculo.detalle.js"
+    "/js/vehiculo.detalle.js": "/js/vehiculo.detalle.js",
+    "/js/seguro.index.js": "/js/seguro.index.js",
+    "/js/seguro.detalle.js": "/js/seguro.detalle.js",
+    "/js/formatter.min.js": "/js/formatter.min.js"
 }

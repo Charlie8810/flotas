@@ -27,15 +27,50 @@ class VehiculoController extends Controller
         return view('vehiculos.detalle',['data'=>$vehiculo, 'vm'=>$vehiculoViewModel]);
     }
 
-    public function edit()
+    public function edit(App\Vehiculo $vehiculo)
     {
-        //todos funcionalidad de store de vehiculo aqui
+        $vehiculoViewModel = [];
+        $vehiculoViewModel['pestanasVM'] = $this->listarPestanasVehiculo($vehiculo);
+        return view('vehiculos.detalle',['data'=>$vehiculo, 'vm'=>$vehiculoViewModel]);
     }
 
     /*****METODOS REST******/
-    public function store()
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-        //todos funcionalidad de store de vehiculo aqui
+        $vehiculo = new App\Vehiculo;
+        $vehiculo->patente = $request->input('patente');
+        $vehiculo->marca = $request->input('marca');
+        $vehiculo->modelo = $request->input('modelo');
+        $vehiculo->anio = $request->input('anio');
+        $vehiculo->kilometrajeInicial = $request->input('kilometrajeInicial');
+        $vehiculo->capacidadEstanque = $request->input('capacidadEstanque');
+        $vehiculo->dueno = $request->input('dueno');
+        $vehiculo->tipoVehiculo = $request->input('tipoVehiculo');
+        $vehiculo->color = $request->input('color');
+        $vehiculo->numeroMotor = $request->input('numeroMotor');
+        $vehiculo->numeroChasis = $request->input('numeroChasis');
+        $vehiculo->observaciones = $request->input('observaciones');
+
+        $vehiculo->save();
+
+
+        $atributos = App\VehiculoDatos::where('idVehiculo','-1')->get();
+        foreach ($atributos as $atributo) {
+            $valor = $request->input('attr_'.$atributo->id);
+            $valor = ($valor == null) ? '' : trim($valor);
+            $vdat = App\VehiculoDatos::clone($atributo);
+            $vdat->idVehiculo = $vehiculo->id;
+            $vdat->valor = $valor;
+            $vdat->save();
+        }
+
+        return ['respuesta'=>true, 'estado'=>'OK','mensaje'=>'Vehiculo '.$vehiculo->patente.' Insertado exitosamente!'];
     }
 
     public function update()
@@ -66,7 +101,7 @@ class VehiculoController extends Controller
                                                ->select('titulo')
                                                ->distinct()
                                                ->get();
-                          
+
            foreach ($titulos as $titulo) {
              $tit = new TituloResultType();
              $tit->nombre = $titulo->titulo;
@@ -94,10 +129,24 @@ class VehiculoController extends Controller
            $res = new PestanaResultType();
            $res->nombre = $pestana->pestana;
            $res->slug = $this::slugify($pestana->pestana);
-           $res->atributos = App\VehiculoDatos::where([['idVehiculo', '=', $vehiculo->id],['pestana', '=', $pestana->pestana]])
-                                              ->get();
+           $res->titulos = Array();
+           $titulos = App\VehiculoDatos::where([['idVehiculo', '=', $vehiculo->id],['pestana', '=', $pestana->pestana]])
+                                               ->select('titulo')
+                                               ->distinct()
+                                               ->get();
+
+           foreach ($titulos as $titulo) {
+             $tit = new TituloResultType();
+             $tit->nombre = $titulo->titulo;
+             $tit->slug = $this::slugify($titulo->titulo);
+             $tit->atributos = App\VehiculoDatos::where([['idVehiculo', '=', $vehiculo->id],['pestana', '=', $pestana->pestana], ['titulo','=',$titulo->titulo]])
+                                                ->orderBy('orden')
+                                                ->get();
+             $res->titulos[] = $tit;
+           }
            $ret[] = $res;
       }
+
       return $ret;
     }
 
