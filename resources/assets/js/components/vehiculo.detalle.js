@@ -1,9 +1,5 @@
 /*Charly Prä!!!*/
 $(document).ready(function(){
-   $('.datepicker').datepicker({
-        autoClose: true,
-        format: 'dd/mm/yyyy'
-   });
 
 
    $("#formVehiculo").validate({
@@ -17,7 +13,7 @@ $(document).ready(function(){
       return false;
    });
 
-    
+
    $("#btn-store").on("click", function(){
       if($('#formVehiculo').valid())
       {

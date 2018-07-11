@@ -17,8 +17,89 @@ require('./materialize');
    accordion: false
  });
 
-/*Carga de tooltip
+const i18n_spanish = {
+  cancel: 'Cancelar',
+  clear: 'Limpiar',
+  months:	[
+            'Enero',
+            'Febrero',
+            'Marzo',
+            'Abril',
+            'Mayo',
+            'Junio',
+            'Julio',
+            'Augosto',
+            'Septiembre',
+            'Octubre',
+            'Noviembre',
+            'Diciembre'
+          ],
+  monthsShort: [
+           'Ene',
+           'Feb',
+           'Mar',
+           'Abr',
+           'May',
+           'Jun',
+           'Jul',
+           'Ago',
+           'Sep',
+           'Oct',
+           'Nov',
+           'Dic'
+         ],
+  weekdays:[
+         'Domingo',
+         'Lunes',
+         'Martes',
+         'Miercoles',
+         'Jueves',
+         'Viernes',
+         'Sabado'
+       ],
+  weekdaysShort:[
+         'Dom',
+         'Lun',
+         'Mar',
+         'Mie',
+         'Jue',
+         'Vie',
+         'Sab'
+       ],
+  weekdaysAbbrev: 	['D','L','M','M','J','V','S']
+
+
+
+
+}
+
  $(function(){
-   $('.tooltipped').tooltip();
+   //$('.tooltipped').tooltip();
+   $('.datepicker').datepicker({
+        container: 'body',
+        autoClose: true,
+        format: 'dd/mm/yyyy',
+        firstDay: 1,
+        i18n: i18n_spanish
+   });
+
+
+   jQuery.each( [ "put", "delete" ], function( i, method ) {
+     jQuery[ method ] = function( url, data, callback, type ) {
+       if ( jQuery.isFunction( data ) ) {
+         type = type || callback;
+         callback = data;
+         data = undefined;
+       }
+
+       return jQuery.ajax({
+         url: url,
+         type: method,
+         dataType: type,
+         data: data,
+         success: callback
+       });
+     };
+   });
+
  });
-*/

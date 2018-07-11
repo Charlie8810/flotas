@@ -60,64 +60,70 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 185);
+/******/ 	return __webpack_require__(__webpack_require__.s = 183);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 185:
+/***/ 183:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(186);
+module.exports = __webpack_require__(184);
 
 
 /***/ }),
 
-/***/ 186:
+/***/ 184:
 /***/ (function(module, exports) {
 
-(function (document, $, undefined) {
-    $.fn.sm_select = function (options) {
-        var defaults = $.extend({
-            input_text: 'Select option...',
-            duration: 200,
-            show_placeholder: false
-        }, options);
-        return this.each(function (e) {
-            $(this).select2(options);
-            var select_state;
-            var drop_down;
-            var obj = $(this);
-            $(this).on('select2:open', function (e) {
-                drop_down = $('body>.select2-container .select2-dropdown');
-                drop_down.find('.select2-search__field').attr('placeholder', $(this).attr('placeholder') != undefined ? $(this).attr('placeholder') : defaults.input_text);
-                drop_down.hide();
-                setTimeout(function () {
-                    if (defaults.show_placeholder == false) {
-                        var out_p = obj.find('option[placeholder]');
-                        out_p.each(function () {
-                            drop_down.find('li:contains("' + $(this).text() + '")').css('display', 'none');
-                        });
-                    }
-                    drop_down.css('opacity', 0).stop(true, true).slideDown(defaults.duration, 'easeOutCubic', function () {
-                        drop_down.find('.select2-search__field').focus();
-                    }).animate({ opacity: 1 }, { queue: false, duration: defaults.duration });
-                }, 10);
-                select_state = true;
+$(function () {
+
+    $("#idMantencionDisponible").select2();
+
+    //Initial
+    if ($('.accionar-tipo').is(':checked')) {
+        $('.por-fecha').addClass('hidden');
+        $('.por-kilometraje').removeClass('hidden');
+    } else {
+        $('.por-fecha').removeClass('hidden');
+        $('.por-kilometraje').addClass('hidden');
+    }
+
+    $('.accionar-tipo').on('change', function () {
+        if ($(this).is(':checked')) {
+            $('.por-fecha').addClass('hidden');
+            $('.por-kilometraje').removeClass('hidden');
+        } else {
+            $('.por-fecha').removeClass('hidden');
+            $('.por-kilometraje').addClass('hidden');
+        }
+    });
+
+    $('.accion').on('click', function () {
+        console.log('action', $('#form-mantencion').prop('action'));
+        console.log('method', $('#form-mantencion').prop('method'));
+        console.log('data', $('#form-mantencion').serialize());
+
+        axios({
+            method: $('#form-mantencion').prop("method"),
+            url: $('#form-mantencion').prop("action"),
+            data: $('#form-mantencion').serialize()
+        }).then(function (response) {
+            if (response.respuesta) {
+                swal("Ok", response.mensaje, "success", {
+                    button: "Aceptar"
+                }).then(function (v) {
+                    location.href = '/vehiculo/' + idVehiculo + '/seguro';
+                });
+            }
+        }).catch(function (error) {
+            swal("Error", 'Error al Guardar el seguro', "error", {
+                button: "Aceptar"
             });
-            $(this).on('select2:closing', function (e) {
-                if (select_state) {
-                    e.preventDefault();
-                    drop_down = $('body>.select2-container .select2-dropdown');
-                    drop_down.slideUp(defaults.duration, 'easeOutCubic', function () {
-                        obj.select2('close');
-                    }).animate({ opacity: 0 }, { queue: false, duration: defaults.duration, easing: 'easeOutSine' });
-                    select_state = false;
-                }
-            });
+            console.log(error);
         });
-    };
-})(document, jQuery);
+    });
+});
 
 /***/ })
 

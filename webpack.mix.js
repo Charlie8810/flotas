@@ -26,6 +26,12 @@ mix.js('resources/assets/js/app.js', 'public/js')
    .js('resources/assets/js/components/seguro.detalle.js', 'public/js')
    .sass('resources/assets/sass/seguro.detalle.scss', 'public/css')
 
+   .js('resources/assets/js/components/configuracion.index.js', 'public/js')
+   .sass('resources/assets/sass/configuracion.index.scss', 'public/css')
+
+   .js('resources/assets/js/components/configuracion.mantencion.js', 'public/js')
+   .sass('resources/assets/sass/configuracion.mantencion.scss', 'public/css')
+
    .js('resources/assets/js/select2-materialize.js', 'public/js')
    .sass('resources/assets/sass/select2-materialize.scss', 'public/css')
 

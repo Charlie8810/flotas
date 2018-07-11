@@ -1,0 +1,19 @@
+.switch label input[type="checkbox"]:not(:checked) + .lever {
+
+    background-color: #ffe0b2 !important;
+
+}
+
+.switch label input[type="checkbox"] + .lever::after {
+
+    background-color: #ff9100;
+
+}
+
+.hidden{
+  display: none;
+}
+
+div.select-especial > div.select-wrapper > input.select-dropdown{
+  display: none !important;
+}

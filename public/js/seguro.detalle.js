@@ -60,20 +60,20 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 177);
+/******/ 	return __webpack_require__(__webpack_require__.s = 179);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 177:
+/***/ 179:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(178);
+module.exports = __webpack_require__(180);
 
 
 /***/ }),
 
-/***/ 178:
+/***/ 180:
 /***/ (function(module, exports) {
 
 $(function () {
@@ -99,10 +99,6 @@ $(function () {
   }
 
   $("#proveedor").select2();
-  $('.datepicker').datepicker({
-    autoClose: true,
-    format: 'dd/mm/yyyy'
-  });
 
   $("#formSeguro").validate({
     errorElement: 'div',
@@ -138,15 +134,17 @@ $(function () {
         console.log(error);
       });
 
-      $.post($('#formSeguro').prop("action"), $('#formSeguro').serialize(), function (data) {
-        if (data.respuesta) {
-          swal("Ok", data.mensaje, "success", {
-            button: "Aceptar"
-          }).then(function (v) {
-            location.href = "/vehiculo/" + idVehiculo + "/seguro";
-          });
-        }
-      }).fail(function () {});
+      /*$.post($('#formSeguro').prop("action"), $('#formSeguro').serialize(), function(data) {
+            if(data.respuesta)
+            {
+                swal("Ok", data.mensaje, "success", {
+                  button: "Aceptar"
+                }).then((v)=>{
+                  location.href=`/vehiculo/${idVehiculo}/seguro`;
+                });
+            }
+      }).fail(function() {
+        });*/
     }
   });
 

@@ -8,8 +8,8 @@
         return [
           e.id,
           e.numeroPoliza,
-          e.inicioCobertura,
-          e.vencimientoCobertura,
+          moment(e.inicioCobertura, "YYYY-MM-DD").format('DD/MM/YYYY'),
+          moment(e.vencimientoCobertura, "YYYY-MM-DD").format('DD/MM/YYYY'),
           e.valorTotal,
           e.montoCuota,
           e.numeroCuotas

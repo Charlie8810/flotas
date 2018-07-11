@@ -47,10 +47,10 @@
                            <select id="proveedor" name="idProveedor" class="validate" required>
                              <option disabled selected placeholder>Selecciona Proveedor...</option>
                              @foreach($vm['proveedores'] as $proveedor)
-                             <option value="{{$proveedor->id}}" selected="{{($data != null && $data->idProveedor == $proveedor->id) ? 'selected' : ''}}">{{$proveedor->rut}} {{$proveedor->nombre}}</option>
+                             <option value="{{$proveedor->id}}" {{($data != null && $data->idProveedor == $proveedor->id) ? 'selected' : ''}}>{{$proveedor->rut}} {{$proveedor->nombre}}</option>
                              @endforeach
                            </select>
-                           <label>Proveedor</label>
+                           <label for="proveedor">Proveedor</label>
                      </div>
                      <div class="input-field col s12 m6">
                         <input id="numeroPoliza" name="numeroPoliza" type="text" class="validate" value="{{($data != null) ? $data->numeroPoliza : ''}}" required>
@@ -83,8 +83,8 @@
                      <div class="input-field col s12 m4">
                       <select id="tipoMoneda" name="tipoMoneda" class="validate" required>
                         <option value="" disabled selected>Selecciona</option>
-                        <option value="UF" selected="{{$data->tipoMoneda == 'UF' ? 'selected':''}}">UF</option>
-                        <option value="Pesos" selected="{{$data->tipoMoneda == 'Pesos' ? 'selected':''}}">Pesos</option>
+                        <option value="UF" selected="{{$data != null && $data->tipoMoneda == 'UF' ? 'selected':''}}">UF</option>
+                        <option value="Pesos" selected="{{$data != null && $data->tipoMoneda == 'Pesos' ? 'selected':''}}">Pesos</option>
                       </select>
                       <label>Tipo Moneda</label>
                     </div>
@@ -110,10 +110,11 @@
                        <input id="montoCuota" name="montoCuota" type="text" class="validate" value="{{($data != null) ? $data->montoCuota  : ''}}" required>
                        <label for="montoCuota">Monto Cuota</label>
                     </div>
-
+                    @if($data == null)
                     <div class="input-field col s12 m2">
                        <a class="waves-effect waves-light btn-small blue" id="doCalcular">Calcular</a>
                     </div>
+                    @endif
 
                    </div>
                    <div class="row">
@@ -136,7 +137,7 @@
 
              </ul>
               <input type="hidden" id="detalleJSON" value="{{$vm['detpjson']}}" />
-              <input type="hidden" id="_nc" value="{{$data->numeroCuotas}}" />
+              <input type="hidden" id="_nc" value="{{$data != null ? $data->numeroCuotas : ''}}" />
             </form>
         </div>
         </div>

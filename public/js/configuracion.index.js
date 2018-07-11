@@ -60,41 +60,34 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 177);
+/******/ 	return __webpack_require__(__webpack_require__.s = 181);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 177:
+/***/ 181:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(178);
+module.exports = __webpack_require__(182);
 
 
 /***/ }),
 
-/***/ 178:
+/***/ 182:
 /***/ (function(module, exports) {
-
-//window.dt = require( 'datatables.net-dt' )(window, window.$);
 
 $(document).ready(function () {
 
-  var _raw_data = JSON.parse($("#__data").val());
-  var _id_vehiculo = $('#__idVehiculo').val();
-  var _prep_data = _raw_data.map(function (e) {
-    return [e.id, e.numeroPoliza, moment(e.inicioCobertura, "YYYY-MM-DD").format('DD/MM/YYYY'), moment(e.vencimientoCobertura, "YYYY-MM-DD").format('DD/MM/YYYY'), e.valorTotal, e.montoCuota, e.numeroCuotas];
-  });
-
-  $('#table-custom-elements').DataTable({
-    data: _prep_data,
+  $("#idMantencionDisponible").select2({ dropdownParent: $("#content-modal-mantenciones") });
+  $('#table-mantenciones').DataTable({
     columnDefs: [{
       targets: 0,
       searchable: !1,
       orderable: !1,
       className: 'dataTables-checkbox-column',
       render: function render(t, e, i, n) {
-        return "<a href=\"/vehiculo/" + _id_vehiculo + "/seguro/" + t + "\" title=\"Detalle Seguro\" class=\"desc-icon\"><i class=\"lite material-icons\">description</i></a>";
+
+        return "<a href=\"" + document.URL.replace('#!', '') + "/mantencion/" + t + "\" title=\"Modificar\" class=\"desc-icon\"><i class=\"lite material-icons\">edit</i></a>\n                    <a href=\"#!\" title=\"Eliminar\" class=\"desc-icon\"><i class=\"lite material-icons\">delete</i></a>";
       }
     }],
     language: {
@@ -111,15 +104,6 @@ $(document).ready(function () {
       $(e.table().container()).find('.paginate_button').addClass('waves-effect'), e.table().columns.adjust();
     }
   });
-  $('#table-custom-elements').on('change', 'input[type=checkbox]', function (t) {
-    var e = $(this).parentsUntil('table').closest('tr');
-    e.toggleClass('selected', this.checked);
-  }), $('#table-custom-elements .select-all').on('click', function () {
-    var t = e.rows({
-      search: 'applied'
-    }).nodes();
-    $('input[type="checkbox"]', t).prop('checked', this.checked), $(t).toggleClass('selected', this.checked);
-  });
 
   $('.desc-icon').on({
     'mouseenter': function mouseenter(event) {
@@ -129,6 +113,65 @@ $(document).ready(function () {
       $(this).find('.material-icons').removeClass('small').addClass('lite');
     }
   });
+
+  $('.accionar-tipo').on('click', function () {
+    if ($(this).is(':checked')) {
+      $('.por-fecha').addClass('hidden');
+      $('.por-kilometraje').removeClass('hidden');
+    } else {
+      $('.por-fecha').removeClass('hidden');
+      $('.por-kilometraje').addClass('hidden');
+    }
+  });
+
+  var mdlMantenciones = M.Modal.getInstance(document.getElementById('modal-mantenciones'));
+  mdlMantenciones.options.onOpenEnd = function (element, opener) {
+
+    var _id_mantencion = $(opener).data("mantencion");
+    if (typeof _id_mantencion != 'undefined') {
+      //console.log('Se esta Editando ' + _id_mantencion);
+      var _id_vehiculo = $('#__idVehiculo').val();
+      $.getJSON("/vehiculo/" + _id_vehiculo + "/configuracion/mantencion/" + _id_mantencion, function (response) {
+
+        //console.log(response);
+        $('.accionar-tipo').prop("checked", response.tipoProgramacion === 'kilometraje');
+        if ($('.accionar-tipo').is(':checked')) {
+          $('.por-fecha').addClass('hidden');
+          $('.por-kilometraje').removeClass('hidden');
+        } else {
+          $('.por-fecha').removeClass('hidden');
+          $('.por-kilometraje').addClass('hidden');
+        }
+
+        $('#idMantencionDisponible').val(response.idMantencionDisponible).trigger('change');
+        $('#fechaInicial').val(response.fechaInicial);
+        //$('#tipoLapso').val(response.tipoLapso != null ? response.tipoLapso : ''); //.trigger('change');
+        $("#tipoLapso option[value=" + response.tipoLapso + "]").prop('selected', true);
+        $('#kilometrajeInicial').val(response.kilometrajeInicial);
+        $('#periodoMantencion').val(response.periodoMantencion);
+        $('.subire').addClass('active');
+      });
+    } else {
+      console.log('No se esta Editando!!!!!!');
+    }
+  };
+
+  mdlMantenciones.options.onCloseEnd = function () {
+    $('.accionar-tipo').prop("checked", false);
+    if ($('.accionar-tipo').is(':checked')) {
+      $('.por-fecha').addClass('hidden');
+      $('.por-kilometraje').removeClass('hidden');
+    } else {
+      $('.por-fecha').removeClass('hidden');
+      $('.por-kilometraje').addClass('hidden');
+    }
+
+    $('#idMantencionDisponible').val('').trigger('change');
+    $('#fechaInicial').val('');
+    $('#kilometrajeInicial').val('');
+    $('#periodoMantencion').val('');
+    $('.subire').removeClass('active');
+  };
 });
 
 /***/ })

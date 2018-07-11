@@ -33,10 +33,7 @@ $(function(){
 
 
   $("#proveedor").select2();
-  $('.datepicker').datepicker({
-       autoClose: true,
-       format: 'dd/mm/yyyy'
-  });
+
 
   $("#formSeguro").validate({
           errorElement : 'div',
@@ -79,7 +76,7 @@ $(function(){
 
 
 
-       $.post($('#formSeguro').prop("action"), $('#formSeguro').serialize(), function(data) {
+       /*$.post($('#formSeguro').prop("action"), $('#formSeguro').serialize(), function(data) {
              if(data.respuesta)
              {
                  swal("Ok", data.mensaje, "success", {
@@ -90,7 +87,7 @@ $(function(){
              }
        }).fail(function() {
 
-       });
+       });*/
      }
   });
 
