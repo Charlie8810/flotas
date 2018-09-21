@@ -13,7 +13,7 @@
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 
 //Route::get('vehiculo', 'VehiculoController@index')->name('vehiculo.index');
@@ -39,3 +39,7 @@ Route::get('vehiculo/{vehiculo}/configuracion/mantencion/{mantencion}','Configur
 
 //Route::resource('combustible','CombustibleController');
 //Route::resource('configuracion','ConfiguracionController');
+
+//Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');

@@ -9,6 +9,7 @@
     "/css/configuracion.mantencion.css": "/css/configuracion.mantencion.css",
     "/css/select2-materialize.css": "/css/select2-materialize.css",
     "/js/select2-materialize.js": "/js/select2-materialize.js",
+    "/js/login.js": "/js/login.js",
     "/js/vehiculo.listado.js": "/js/vehiculo.listado.js",
     "/js/vehiculo.detalle.js": "/js/vehiculo.detalle.js",
     "/js/seguro.index.js": "/js/seguro.index.js",
