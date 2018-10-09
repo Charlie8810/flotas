@@ -1,1 +1,1 @@
-web: vendor/bin/buses-villar public/
+web: vendor/bin/flotas public/
