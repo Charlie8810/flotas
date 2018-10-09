@@ -1,1 +1,1 @@
-web: vendor/bin/flotas public/
+web: app public/
